@@ -3,14 +3,10 @@
 import time
 import random2 as random
 #-------------------------------------------------#
-#все глобальные переменные
-k = 0
-password = 'sshh'
-#-------------------------------------------------#
 #помощь
 def helps():
     print('Это помощник по боту. Тут будут ссылки на создателя и небольшая информация обо мне и о создателе:\n')
-    print('Версия меня: 0.1.7\n')
+    print('Версия меня: 0.2.3\n')
     print('ссылки на создателя:\nВКонтакте: https://vk.com/darkangel58414\nGit-hub: https://github.com/droid-darkangel\nTelegram: @darkangel58414\n')
     print('Моя первая версия была написана спустя пол года, как мой создатель решил писать на Python\n')
     print('Удачи тебе в следующем запуске меня!')
@@ -19,6 +15,9 @@ def helps():
         main_screen()
     if check == 'exit':
         exit()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        helps()
 #-------------------------------------------------#
 #квадратные уравнения
 def kvad_uravn():
@@ -54,6 +53,9 @@ def kvad_uravn():
         kvad_uravn()
     if choice == 'нет':
         main_screen()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        kvad_uravn()
 #-------------------------------------------------#
 #радиус и площадь
 def radius_plochad():
@@ -66,15 +68,17 @@ def radius_plochad():
             print("Площадь = ", 3.14 * radius ** 2)
         else:
             print("Пожалуйста, введите положительное число")
-        check = input('back или exit: ')
-        if check == 'back':
+        check = input('ещё раз? да/нет: ')
+        if check == 'да':
+            radius_plochad()
+        if check == 'нет':
             main_screen()
-        if check == 'exit':
-            main_screen()
-            break
+        else:
+            print('Вы не правильно ввели, попробуйте ещё раз!')
+            radius_plochad()
 #-------------------------------------------------#
 #корень из числа
-def Koren():
+def koren():
     print('Вычисление корня из числа')
     print('Возможны большие числа после запятой, поэтому округляйте сами')
     n = float(input('Введите число: '))
@@ -82,9 +86,12 @@ def Koren():
     print('Ваше число: ', nk)
     choice = input('ещё раз? да/нет: ')
     if choice == 'да':
-        Koren()
+        koren()
     if choice == 'нет':
         main_screen()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        koren()
 #-------------------------------------------------#
 #периметр и площадь
 def perimetr_plochad():
@@ -99,11 +106,14 @@ def perimetr_plochad():
     P = perimetr(x,y)
     print('Площадь равна: ',S)
     print('Периметр равен: ',P)
-    check = input('back или exit: ')
-    if check == 'back':
+    check = input('ещё раз? да/нет: ')
+    if check == 'да':
+        perimetr_plochad()
+    if check == 'нет':
         main_screen()
-    if check == 'exit':
-        exit()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        perimetr_plochad()
 #-------------------------------------------------#
 #игра blackjack
 koloda = [6,7,8,9,10,2,3,4,11] * 4
@@ -189,6 +199,9 @@ def blackjack():
                     break
         if language == 'exit':
             main_screen()
+        else:
+            print('Вы не правильно ввели, попробуйте ещё раз!')
+            blackjack()
 #-------------------------------------------------#
 #шифр цезаря
 def shifr():
@@ -251,9 +264,12 @@ def uravn():
     if seek_urav == 'KV':
         kvad_uravn()
     if seek_urav == 'KOR':
-        Koren()
+        koren()
     if seek_urav == 'exit':
         main_screen()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        uravn()
 #-------------------------------------------------#
 def games():
     print('Выбор игры')
@@ -262,6 +278,9 @@ def games():
     game = input('Выберите игру: ')
     if game == 'blackjack':
         blackjack()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        games()
 #-------------------------------------------------#
 #главный экран
 def main_screen():
@@ -278,6 +297,9 @@ def main_screen():
         uravn()
     if seek == 'exit':
         exit()
+    else:
+        print('Вы не правильно ввели, попробуйте ещё раз!')
+        main_screen()
 #-------------------------------------------------#
 #загрузочная анимация
 def loading(x):
@@ -287,20 +309,26 @@ def loading(x):
     main_screen()
 #-------------------------------------------------#
 #ввод пароля
-while k<3:
-    try:
-        password1 = input("Введите пароль: ")
-        if password1 == password:
-            print("Добро пожаловать")
-            x = random.randint(7, 20)
-            loading(x)
-            break
-        if password1 != password:
-            raise ValueError
-    except ValueError:
-        print("Доступ запрещен")
-        k += 1
-if k == 3:
-    print('Закончились попытки ввода. Пожалуйста перезагрузите программу и попробуйте ещё раз')
-    exit()
+def start_password():
+    k = 0
+    password = 'sshh'
+    while k<3:
+        try:
+            password1 = input("Введите пароль: ")
+            if password1 == password:
+                print("Добро пожаловать")
+                x = random.randint(7, 20)
+                loading(x)
+                break
+            if password1 != password:
+                raise ValueError
+        except ValueError:
+            print("Доступ запрещен")
+            k += 1
+    if k == 3:
+        print('Закончились попытки ввода. Пожалуйста перезагрузите программу и попробуйте ещё раз')
+        exit()
+#-------------------------------------------------#
+#запуск программы
+start_password()
 #-------------------------------------------------#
